@@ -1,0 +1,3 @@
+.hover-links {
+  @apply hover:text-[var(--red)] transition-all duration-150 ease-in;
+}

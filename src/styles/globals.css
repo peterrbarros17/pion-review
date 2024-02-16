@@ -1,3 +1,4 @@
+@import url(hover-link.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,5 +14,5 @@
 body {
   background-color: var(--black);
   color: var(--white);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1rem;
 }
