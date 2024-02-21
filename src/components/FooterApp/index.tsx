@@ -25,7 +25,7 @@ const FooterApp: FunctionComponent<FooterAppProps> = () => {
           Discord
         </Link>
       </div>
-      <nav className="flex gap-4 text-3xl">
+      <nav className="flex gap-4 text-xl md:text-2xl">
         <Link
           href=""
           className="bg-[var(--gray)] hover:bg-indigo-500 p-2 rounded-full hover-links-midias"

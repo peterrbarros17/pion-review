@@ -8,7 +8,7 @@ const MainContainer: FunctionComponent<MainContainerProps> = ({
   children,
 }: MainContainerProps) => {
   return (
-    <div className="z-10 max-w-5xl w-full items-center justify-between m-10">
+    <div className="z-10 max-w-7xl w-full items-center justify-between m-10">
       {children}
     </div>
   );
