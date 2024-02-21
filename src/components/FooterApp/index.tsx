@@ -15,7 +15,7 @@ interface FooterAppProps {}
 
 const FooterApp: FunctionComponent<FooterAppProps> = () => {
   return (
-    <footer className="flex flex-col items-center justify-center gap-2">
+    <footer className="flex flex-col items-center justify-center gap-1 md:gap-2 text-[12px] md:text-sm">
       <Link href="#" className="hover-links">
         Volta ao Topo
       </Link>
