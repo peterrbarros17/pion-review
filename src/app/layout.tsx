@@ -25,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={poppins.className}>
+        <BlurCircle />
         <HeaderApp />
         <BodyContainer>
-          <BlurCircle />
           <MainContainer>{children}</MainContainer>
         </BodyContainer>
         <FooterApp />

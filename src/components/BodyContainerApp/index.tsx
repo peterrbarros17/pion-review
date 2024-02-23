@@ -8,7 +8,7 @@ const BodyContainer: FunctionComponent<BodyContainerProps> = ({
   children,
 }: BodyContainerProps) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between">
+    <div className="flex min-h-screen flex-col items-center justify-between my-10">
       {children}
     </div>
   );
