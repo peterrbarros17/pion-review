@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import CardHeaders from "../CardHeaders";
 import { RiFireFill } from "react-icons/ri";
+import Link from "next/link";
 
 interface CardNewsProps {}
 
@@ -32,11 +33,13 @@ const CardNews: FunctionComponent<CardNewsProps> = () => {
           size={24}
         />
       </div>
-      <ul className="flex flex-col divide-y-2 p-2 md:p-4 space-y-1">
+      <ul className="flex flex-col divide-y-2 p-2 md:p-4">
         {news.map((item) => (
           <li key={item.id} className="py-4">
-            <h3>{item.title}</h3>
-            <p className="text-slate-300">{item.description}</p>
+            <Link href="">
+              <h3>{item.title}</h3>
+              <p className="text-slate-300">{item.description}</p>
+            </Link>
           </li>
         ))}
       </ul>
