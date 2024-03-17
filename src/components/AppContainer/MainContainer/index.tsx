@@ -1,17 +1,11 @@
-import { FunctionComponent } from "react";
-
 interface MainContainerProps {
   children: React.ReactNode;
 }
 
-const MainContainer: FunctionComponent<MainContainerProps> = ({
-  children,
-}: MainContainerProps) => {
+export default function MainContainer({ children }: MainContainerProps) {
   return (
     <div className="z-10 max-w-5xl w-full items-center justify-between m-6">
       {children}
     </div>
   );
-};
-
-export default MainContainer;
+}

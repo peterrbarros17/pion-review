@@ -1,5 +1,4 @@
 import React from "react";
-import { FunctionComponent } from "react";
 import { IconType } from "react-icons";
 
 interface CardHeadersProps {
@@ -9,18 +8,16 @@ interface CardHeadersProps {
   color?: string;
 }
 
-const CardHeaders: FunctionComponent<CardHeadersProps> = ({
-  title = "card header title",
+export default function CardHeaders({
+  title,
   icon,
-  size = 24,
-  color = "",
-}) => {
+  size,
+  color,
+}: CardHeadersProps) {
   return (
     <div className="flex items-center gap-2">
       <div>{React.createElement(icon, { size, color })}</div>
       <h1 className="text-lg">{title}</h1>
     </div>
   );
-};
-
-export default CardHeaders;
+}

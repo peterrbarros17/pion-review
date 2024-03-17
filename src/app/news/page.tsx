@@ -1,9 +1,11 @@
-import { FunctionComponent } from "react";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Novidades sobre jogos e lançamentos - Pion Review",
+  description: "App games review",
+};
 
 interface NewsPageProps {}
 
-const NewsPage: FunctionComponent<NewsPageProps> = () => {
+export default function NewsPage({}: NewsPageProps) {
   return <h1>News Page</h1>;
-};
-
-export default NewsPage;
+}

@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { FunctionComponent, useState } from "react";
+import { useState } from "react";
 
 interface HeaderAppProps {}
 
-const HeaderApp: FunctionComponent<HeaderAppProps> = () => {
+export default function HeaderApp({}: HeaderAppProps) {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const toggleMenu = () => {
     setIsOpenMenu(!isOpenMenu);
@@ -45,6 +45,4 @@ const HeaderApp: FunctionComponent<HeaderAppProps> = () => {
       </nav>
     </header>
   );
-};
-
-export default HeaderApp;
+}

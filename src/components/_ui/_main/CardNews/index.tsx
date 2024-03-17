@@ -1,11 +1,10 @@
-import { FunctionComponent } from "react";
-import CardHeaders from "../CardHeaders";
+import CardHeaders from "../CardsHeader";
 import { RiFireFill } from "react-icons/ri";
 import Link from "next/link";
 
 interface CardNewsProps {}
 
-const CardNews: FunctionComponent<CardNewsProps> = () => {
+export default function CardNews({}: CardNewsProps) {
   const news = [
     {
       id: 1,
@@ -45,6 +44,4 @@ const CardNews: FunctionComponent<CardNewsProps> = () => {
       </ul>
     </aside>
   );
-};
-
-export default CardNews;
+}

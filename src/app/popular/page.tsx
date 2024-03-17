@@ -1,9 +1,12 @@
-import { FunctionComponent } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Os melhore jogos mais bem avaliados - Pion Review",
+  description: "App games review",
+};
 
 interface PopularPageProps {}
 
-const PopularPage: FunctionComponent<PopularPageProps> = () => {
+export default function PopularPage({}: PopularPageProps) {
   return <h1>Popular Page</h1>;
-};
-
-export default PopularPage;
+}

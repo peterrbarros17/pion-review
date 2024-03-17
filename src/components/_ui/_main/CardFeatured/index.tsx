@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FunctionComponent } from "react";
-import CardHeaders from "../CardHeaders";
+import CardHeaders from "../CardsHeader";
 import { AiOutlineWeibo } from "react-icons/ai";
 
 interface CardInHighProps {}
 
-const CardInHigh: FunctionComponent<CardInHighProps> = () => {
+export default function CardInHigh({}: CardInHighProps) {
   return (
     <section className="w-full p-2 md:p-0 md:w-2/3 bg-[var(--gray-dark)] overflow-hidden flex flex-col">
       <div className="my-4 ml-0 md:ml-2">
@@ -39,6 +38,4 @@ const CardInHigh: FunctionComponent<CardInHighProps> = () => {
       </Link>
     </section>
   );
-};
-
-export default CardInHigh;
+}

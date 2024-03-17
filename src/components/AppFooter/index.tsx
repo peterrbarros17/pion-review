@@ -3,7 +3,6 @@ import { FaDiscord, FaTwitch, FaYoutube } from "react-icons/fa";
 import { IoLogoDiscord } from "react-icons/io5";
 import { FaRegCopyright } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import { FunctionComponent } from "react";
 import { Concert_One } from "next/font/google";
 
 const concertOne = Concert_One({
@@ -13,7 +12,7 @@ const concertOne = Concert_One({
 
 interface FooterAppProps {}
 
-const FooterApp: FunctionComponent<FooterAppProps> = () => {
+export default function FooterApp({}: FooterAppProps) {
   return (
     <footer className="flex flex-col items-center justify-center gap-1 md:gap-2 text-[12px] md:text-sm">
       <Link href="#" className="hover-links">
@@ -68,6 +67,4 @@ const FooterApp: FunctionComponent<FooterAppProps> = () => {
       </p>
     </footer>
   );
-};
-
-export default FooterApp;
+}

@@ -1,5 +1,5 @@
-import CardInHigh from "@/components/CardInHigh";
-import CardNews from "@/components/CardNews";
+import CardInHigh from "@/components/_ui/_main/CardFeatured";
+import CardNews from "@/components/_ui/_main/CardNews";
 
 export default function Home() {
   return (
