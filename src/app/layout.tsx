@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
-import BodyContainer from "@/components/AppContainer";
-import HeaderApp from "@/components/AppHeader";
-import FooterApp from "@/components/AppFooter";
-import BlurCircle from "@/components/_ui/RedBlurOfApp";
+import AppContainer from "@/components/AppContainer";
+import AppHeader from "@/components/AppHeader";
+import AppFooter from "@/components/AppFooter";
+import RedBlurOfApp from "@/components/_ui/RedBlurOfApp";
 import MainContainer from "@/components/AppContainer/MainContainer";
 
 const poppins = Poppins({
@@ -14,7 +14,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Pion Review - Acompanhe as reviews de jogos retros e atuais",
-  description: "App games review",
+  description: "Site sobre reviews de jogos digitais",
 };
 
 export default function RootLayout({
@@ -23,14 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-br">
       <body className={poppins.className}>
-        <BlurCircle />
-        <HeaderApp />
-        <BodyContainer>
+        <RedBlurOfApp />
+        <AppHeader />
+        <AppContainer>
           <MainContainer>{children}</MainContainer>
-        </BodyContainer>
-        <FooterApp />
+        </AppContainer>
+        <AppFooter />
       </body>
     </html>
   );

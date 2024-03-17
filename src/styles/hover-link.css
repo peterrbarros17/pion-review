@@ -2,5 +2,5 @@
   @apply hover:text-[var(--red)] transition-all duration-150 ease-in;
 }
 .hover-links-midias {
-  @apply hover:transition-all duration-150 ease-in;
+  @apply bg-[var(--gray)] p-2 rounded-full hover:transition-all duration-150 ease-in;
 }

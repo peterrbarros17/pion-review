@@ -7,6 +7,10 @@ export const metadata: Metadata = {
 
 interface ReviewsPageProps {}
 
-export default function ReviewsPage({}: ReviewsPageProps) {
-  return <h1>Reviews Page</h1>;
+export default async function ReviewsPage({}: ReviewsPageProps) {
+  return (
+    <div>
+      <h1>Reviews Page</h1>
+    </div>
+  );
 }

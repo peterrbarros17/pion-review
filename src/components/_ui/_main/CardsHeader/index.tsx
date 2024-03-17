@@ -1,23 +1,23 @@
 import React from "react";
 import { IconType } from "react-icons";
 
-interface CardHeadersProps {
+interface CardsHeaderProps {
   title: string;
   icon: IconType;
   size?: string | number;
   color?: string;
 }
 
-export default function CardHeaders({
+export default function CardsHeader({
   title,
   icon,
   size,
   color,
-}: CardHeadersProps) {
+}: CardsHeaderProps) {
   return (
-    <div className="flex items-center gap-2">
+    <header className="flex items-center gap-2">
       <div>{React.createElement(icon, { size, color })}</div>
-      <h1 className="text-lg">{title}</h1>
-    </div>
+      <h2 className="text-lg">{title}</h2>
+    </header>
   );
 }
