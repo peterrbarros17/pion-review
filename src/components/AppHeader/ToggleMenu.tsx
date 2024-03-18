@@ -27,11 +27,11 @@ export default function ToggleMenu() {
         <Link href="/" className="hover-links">
           Início
         </Link>
-        <Link href="/news" className="hover-links">
-          Novidades
-        </Link>
         <Link href="/reviews" className="hover-links">
           Reviews
+        </Link>
+        <Link href="/news" className="hover-links">
+          Novidades
         </Link>
         <Link href="/popular" className="hover-links">
           Popular

@@ -2,40 +2,48 @@ import Image from "next/image";
 import Link from "next/link";
 import CardHeaders from "../CardsHeader";
 import { AiOutlineWeibo } from "react-icons/ai";
+import CardComponent from "./CardComponent";
 
-interface CardInHighProps {}
+interface CardFeaturedProps {}
 
-export default function CardInHigh({}: CardInHighProps) {
+const card = [
+  {
+    id: 1,
+    alt: "resident evil outbreak",
+    url: "https://wallpapers.com/images/hd/fan-art-umbrella-logo-resident-evil-hd-fdjmdag2fz7w6akt.jpg",
+    title: "Residen Evil Outbreak",
+    description:
+      "Conheça esse game spin-off da franquia residenti evil que conta a história de outros sobreviventes de raccoon city",
+    textButton: "Leia mais...",
+    slug: "resident-evil-outbreak",
+  },
+];
+
+export default function CardFeatured({}: CardFeaturedProps) {
   return (
     <section className="w-full p-2 md:p-0 md:w-2/3 bg-[var(--gray-dark)] overflow-hidden flex flex-col">
       <div className="my-4 ml-0 md:ml-2">
         <CardHeaders
-          title="Novidades"
+          title="Em alta"
           icon={AiOutlineWeibo}
           color="var(--red)"
           size={24}
         />
       </div>
-      <Link href="" className="flex flex-col gap-4">
-        <Image
-          alt="resident evil post"
-          src="https://wallpapers.com/images/hd/resident-evil-biohazard-horror-game-series-jill-valentine-gz9olv8bqzklu3te.jpg"
-          width={1920}
-          height={1080}
-          priority={true}
-          className="hover:scale-105 transition-transform ease-in duration-150"
-        />
-        <article className="flex flex-col md:flex md:flex-row gap-4 px-0 py-0 md:px-2 md:py-2 items-center">
-          <h1 className=" text-4xl w-full md:w-[40%]">Resident evil</h1>
-          <div className="flex flex-col gap-2 items-center w-full md:w-[60%]">
-            <p>
-              Resident evil 3, conheça os principais personagens, enredo e dicas
-              sobre esse grande survival horror
-            </p>
-            <button className="bg-[var(--red)] w-full">Leia mais...</button>
-          </div>
-        </article>
-      </Link>
+
+      <div className="flex flex-col gap-4">
+        {card.map((item) => (
+          <CardComponent
+            key={item.id}
+            alt={item.alt}
+            description={item.description}
+            title={item.title}
+            url={item.url}
+            textButton={item.textButton}
+            slug={item.slug}
+          />
+        ))}
+      </div>
     </section>
   );
 }

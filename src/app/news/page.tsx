@@ -1,3 +1,4 @@
+import CardNews from "@/components/_ui/_main/CardNews";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Novidades sobre jogos e lançamentos - Pion Review",
@@ -7,5 +8,11 @@ export const metadata: Metadata = {
 interface NewsPageProps {}
 
 export default function NewsPage({}: NewsPageProps) {
-  return <h1>News Page</h1>;
+  return (
+    <div className="flex gap-4">
+      <CardNews />
+      <CardNews />
+      <CardNews />
+    </div>
+  );
 }
