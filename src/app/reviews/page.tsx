@@ -10,11 +10,7 @@ export const metadata: Metadata = {
   description: "App games review",
 };
 
-interface ReviewsPageProps {
-  items: HomePageType[];
-}
-
-export default async function ReviewsPage({ items }: ReviewsPageProps) {
+export default async function ReviewsPage() {
   const data: HomePageType[] = await getHomePost("reviewpage");
 
   return (
