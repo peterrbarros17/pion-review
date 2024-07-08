@@ -15,7 +15,9 @@ export async function getPosts(page: any) {
 }
 
 export async function getHomePost(id: string) {
-  const res = await fetch(`https://pion-api.vercel.app/${id}`);
+  const res = await fetch(`https://pion-api.vercel.app/${id}`, {
+    next: { revalidate: 0 },
+  });
   if (!res.ok) {
     logger.error("Erro na requisição da API");
 
