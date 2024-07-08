@@ -1,7 +1,7 @@
 import CardHeaders from "../CardsHeader";
-import { AiOutlineWeibo } from "react-icons/ai";
 import CardComponent from "./CardComponent";
 import { HomePageType } from "@/types/homePageType";
+import { RiFireFill } from "react-icons/ri";
 
 interface MyItems {
   items: HomePageType[];
@@ -13,14 +13,14 @@ export default function CardFeatured({ items }: MyItems) {
       <div className="my-4 ml-0 md:ml-2">
         <CardHeaders
           title="Em alta"
-          icon={AiOutlineWeibo}
+          icon={RiFireFill}
           color="var(--red)"
           size={24}
         />
       </div>
 
       <div className="flex flex-col gap-4">
-        {items.map((item: any) => (
+        {items.map((item) => (
           <CardComponent
             key={item._id}
             alt={item.alt}

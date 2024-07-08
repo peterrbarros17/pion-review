@@ -9,7 +9,7 @@ interface NewsPageProps {}
 
 export default function NewsPage({}: NewsPageProps) {
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col md:flex md:flex-row gap-4">
       <CardNews />
       <CardNews />
       <CardNews />

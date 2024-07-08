@@ -7,4 +7,11 @@ export interface HomePageType {
   textButton: string;
   slug: string;
 }
+
+export interface NewPostPageType {
+  _id: string;
+  title: string;
+  description: string;
+  slug: string;
+}
 [];
