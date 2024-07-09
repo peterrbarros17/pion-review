@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ReviewsPage() {
-  const data: HomePageType[] = await getHomePost("reviewpage");
+  const data: HomePageType[] = await getHomePost("reviewspage");
 
   return (
     <div className="bg-[var(--black)] p-4">
