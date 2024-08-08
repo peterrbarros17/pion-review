@@ -12,7 +12,7 @@ const concertOne = Concert_One({
 
 interface AppFooterProps {}
 
-export default function AppFooter({}: AppFooterProps) {
+const AppFooter = ({}: AppFooterProps) => {
   const socialMedias = [
     {
       id: 1,
@@ -78,4 +78,6 @@ export default function AppFooter({}: AppFooterProps) {
       </p>
     </footer>
   );
-}
+};
+
+export default AppFooter;

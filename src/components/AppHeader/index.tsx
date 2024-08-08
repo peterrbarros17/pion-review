@@ -3,7 +3,7 @@ import ToggleMenu from "./ToggleMenu";
 
 interface AppHeaderProps {}
 
-export default function AppHeader({}: AppHeaderProps) {
+const AppHeader = ({}: AppHeaderProps) => {
   return (
     <header className="flex px-2 md:p-0 items-center justify-between md:justify-around h-12 md:flex md:flex-row bg-[var(--gray-dark)]">
       <Link href="/" className="text-xl">
@@ -12,4 +12,6 @@ export default function AppHeader({}: AppHeaderProps) {
       <ToggleMenu />
     </header>
   );
-}
+};
+
+export default AppHeader;

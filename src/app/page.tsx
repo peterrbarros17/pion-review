@@ -3,7 +3,7 @@ import CardNews from "@/components/_ui/_main/CardNews";
 import { getHomePost } from "@/lib/getPosts";
 import { HomePageType } from "@/types/homePageType";
 
-export default async function Home() {
+const Home = async () => {
   const data: HomePageType[] = await getHomePost("homepage");
   return (
     <main>
@@ -13,4 +13,6 @@ export default async function Home() {
       </div>
     </main>
   );
-}
+};
+
+export default Home;

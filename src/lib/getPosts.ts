@@ -1,17 +1,17 @@
 import logger from "@/logger";
 
-export async function getPosts(page: any) {
-  const res = await fetch(
-    `http://localhost:3001/reviews?_page=${page}&_per_page=6`
-  );
-  if (!res.ok) {
-    logger.error("Erro na requisição da API");
+export default async function getPostBySlug(slug: string) {
+  const url = `https://pion-api.vercel.app/reviewspage?slug=${slug}`;
 
-    return [];
-  }
+  const res = await fetch(url);
+  if (!res.ok) return {};
 
-  logger.info("Dados da API obtidos com sucesso");
-  return res.json();
+  const data = await res.json();
+
+  if (data.length === 0) return {};
+  console.log(data);
+
+  return data;
 }
 
 export async function getHomePost(id: string) {

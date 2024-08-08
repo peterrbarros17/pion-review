@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "App games review",
 };
 
-export default async function ReviewsPage() {
+const ReviewsPage = async () => {
   const data: HomePageType[] = await getHomePost("reviewspage");
 
   return (
@@ -39,4 +39,6 @@ export default async function ReviewsPage() {
       </ul>
     </div>
   );
-}
+};
+
+export default ReviewsPage;

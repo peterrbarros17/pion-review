@@ -7,7 +7,7 @@ interface MyItems {
   items: HomePageType[];
 }
 
-export default function CardFeatured({ items }: MyItems) {
+const CardFeatured = ({ items }: MyItems) => {
   return (
     <section className="w-full p-2 md:p-0 md:w-2/3 bg-[var(--gray-dark)] overflow-hidden flex flex-col">
       <div className="my-4 ml-0 md:ml-2">
@@ -34,4 +34,6 @@ export default function CardFeatured({ items }: MyItems) {
       </div>
     </section>
   );
-}
+};
+
+export default CardFeatured;

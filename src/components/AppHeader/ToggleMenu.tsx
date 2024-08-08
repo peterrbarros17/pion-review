@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function ToggleMenu() {
+const ToggleMenu = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const toggleMenu = () => {
     setIsOpenMenu(!isOpenMenu);
@@ -39,4 +39,6 @@ export default function ToggleMenu() {
       </nav>
     </>
   );
-}
+};
+
+export default ToggleMenu;

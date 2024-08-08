@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 interface PopularPageProps {}
 
-export default function PopularPage({}: PopularPageProps) {
+const PopularPage = ({}: PopularPageProps) => {
   return (
     <h1>Popular</h1>
     // <section className="bg-[var(--black)] p-4">
@@ -25,4 +25,6 @@ export default function PopularPage({}: PopularPageProps) {
     //   <CardPopular />
     // </section>
   );
-}
+};
+
+export default PopularPage;

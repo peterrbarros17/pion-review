@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 interface NewsPageProps {}
 
-export default function NewsPage({}: NewsPageProps) {
+const NewsPage = ({}: NewsPageProps) => {
   return (
     <div className="flex flex-col md:flex md:flex-row gap-4">
       <CardNews />
@@ -15,4 +15,6 @@ export default function NewsPage({}: NewsPageProps) {
       <CardNews />
     </div>
   );
-}
+};
+
+export default NewsPage;

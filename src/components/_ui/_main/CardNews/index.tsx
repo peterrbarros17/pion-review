@@ -6,7 +6,7 @@ import { AiOutlineWeibo } from "react-icons/ai";
 
 interface CardNewsProps {}
 
-export default async function CardNews({}: CardNewsProps) {
+const CardNews = async ({}: CardNewsProps) => {
   const data: NewPostPageType[] = await getHomePost("newspage");
 
   return (
@@ -31,4 +31,6 @@ export default async function CardNews({}: CardNewsProps) {
       </ul>
     </aside>
   );
-}
+};
+
+export default CardNews;
