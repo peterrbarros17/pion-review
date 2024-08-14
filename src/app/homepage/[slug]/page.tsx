@@ -1,6 +1,6 @@
 import getPostBySlug from "@/lib/getPosts";
-import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
 import {
   ReactElement,
   JSXElementConstructor,
@@ -11,16 +11,15 @@ import {
 } from "react";
 
 const PageSlug = async ({ page, params }: any) => {
-  const post = await getPostBySlug((page = "reviewspage"), params.slug);
-  console.log(post);
+  const post = await getPostBySlug((page = "homepage"), params.slug);
 
   return (
     <div>
       <div className="w-full md:w-10/12 p-4 md:p-0 flex flex-col gap-2">
         <h1 className="text-[24px] bg-[var(--red)] p-2 capitalize">
-          {post.title}
+          {post[0].title}
         </h1>
-        {post.content.map(
+        {post[0].content.map(
           (
             type: {
               type: string;
