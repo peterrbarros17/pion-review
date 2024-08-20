@@ -1,7 +1,7 @@
 import logger from "@/logger";
 
 export default async function getPostBySlug(page: string, slug: string) {
-  const url = `http://localhost:3000/${page}?slug=${slug}`;
+  const url = `https://pion-api.vercel.app/${page}?slug=${slug}`;
 
   const res = await fetch(url);
   if (!res.ok) return {};

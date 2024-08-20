@@ -12,7 +12,6 @@ import {
 
 const PageSlug = async ({ page, params }: any) => {
   const post = await getPostBySlug((page = "reviewspage"), params.slug);
-  console.log(post);
 
   return (
     <div>
