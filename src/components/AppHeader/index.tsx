@@ -6,12 +6,16 @@ interface AppHeaderProps {}
 
 const AppHeader = ({}: AppHeaderProps) => {
   return (
-    <header className="flex flex-col sm:flex sm:flex-row px-2 md:p-0 items-center justify-between md:justify-around h-12 md:flex md:flex-row bg-[var(--gray-dark)]">
-      <Link href="/" className="text-xl">
-        Pion Review
-      </Link>
-      <ToggleMenu />
-      <Search />
+    <header className="flex flex-col items-center gap-4 p-4 md:flex-col md:justify-between md:items-center bg-gradient-to-r from-red-800 to-bg-[var(--gray-dark)]">
+      <div className="flex items-center gap-2">
+        <Link href="/" className="text-xl my-2">
+          <div className="text-2xl font-bold">Pion Review</div>
+        </Link>
+      </div>
+      <div className="flex items-center justify-between w-full lg:w-[1000px] bg-[var(--gray-dark)] p-2">
+        <ToggleMenu />
+        <Search />
+      </div>
     </header>
   );
 };

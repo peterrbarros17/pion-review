@@ -4,7 +4,6 @@ import "@/styles/globals.css";
 import AppContainer from "@/components/AppContainer";
 import AppHeader from "@/components/AppHeader";
 import AppFooter from "@/components/AppFooter";
-import RedBlurOfApp from "@/components/_ui/RedBlurOfApp";
 import MainContainer from "@/components/AppContainer/MainContainer";
 
 const poppins = Poppins({
@@ -25,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={poppins.className}>
-        <RedBlurOfApp />
         <AppHeader />
         <AppContainer>
           <MainContainer>{children}</MainContainer>

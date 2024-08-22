@@ -20,8 +20,8 @@ const ToggleMenu = () => {
       <nav
         className={`${
           isOpenMenu
-            ? "flex gap-4 absolute right-0 top-12 bg-[var(--gray-dark)] py-2 px-4"
-            : "hidden md:flex gap-4"
+            ? "flex  items-center gap-4 absolute left-0 top-32 bg-[var(--gray-dark)] py-2 px-4 md:static md:flex-row"
+            : "hidden md:flex gap-4 bg-[var(--gray-dark)] px-4"
         }`}
       >
         <Link href="/" className="hover-links">
