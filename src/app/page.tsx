@@ -9,6 +9,8 @@ import { RiFireFill } from "react-icons/ri";
 
 const Home = async () => {
   const data: HomePageType[] = await getHomePost("homepage");
+  const featured = data[0];
+
   return (
     <main>
       <div className="flex flex-col md:flex md:flex-row gap-4">
@@ -21,25 +23,31 @@ const Home = async () => {
               size={24}
             />
           </div>
-          <Link href={`/homepage/${data[0].slug}`}>
-            <Image
-              alt={data[0].alt}
-              src={data[0].url}
-              width={1920}
-              height={1080}
-              priority={true}
-              className="cursor-pointer hover:scale-105 transition-transform ease-in duration-150"
-            />
-            <article className="flex flex-col md:flex md:flex-row gap-4 px-0 py-0 md:px-2 md:py-2 items-center my-4">
-              <h1 className=" text-4xl w-full md:w-[40%] capitalize">
-                {data[0].title}
-              </h1>
-              <div className="flex flex-col gap-2 items-center w-full md:w-[60%]">
-                <p>{data[0].description}</p>
-                <ReadMoreButton>Leia mais...</ReadMoreButton>
-              </div>
-            </article>
-          </Link>
+          {featured ? (
+            <Link href={`/homepage/${featured.slug}`}>
+              <Image
+                alt={featured.alt}
+                src={featured.url}
+                width={1920}
+                height={1080}
+                priority={true}
+                className="cursor-pointer hover:scale-105 transition-transform ease-in duration-150"
+              />
+              <article className="flex flex-col md:flex md:flex-row gap-4 px-0 py-0 md:px-2 md:py-2 items-center my-4">
+                <h1 className=" text-4xl w-full md:w-[40%] capitalize">
+                  {featured.title}
+                </h1>
+                <div className="flex flex-col gap-2 items-center w-full md:w-[60%]">
+                  <p>{featured.description}</p>
+                  <ReadMoreButton>Leia mais...</ReadMoreButton>
+                </div>
+              </article>
+            </Link>
+          ) : (
+            <p className="p-4 text-slate-300">
+              Nenhum destaque disponível no momento.
+            </p>
+          )}
         </div>
         <CardNews />
       </div>
