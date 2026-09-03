@@ -1,40 +1,53 @@
 import CardNews from "@/components/_ui/_main/CardNews";
+import CardComponent from "@/components/_ui/_main/CardFeatured/CardComponent";
 import CardsHeader from "@/components/_ui/_main/CardsHeader";
 import { getHomePost } from "@/lib/getPosts";
-import { HomePageType } from "@/types/homePageType";
+import type { HomePageType, ReviewPost } from "@/types/homePageType";
 import Image from "next/image";
 import Link from "next/link";
 
 const Home = async () => {
-  const data: HomePageType[] = await getHomePost("homepage");
-  const featured = data[0];
+  const reviews = (await getHomePost("reviewspage")) as Array<
+    HomePageType & Partial<ReviewPost>
+  >;
+  const [featured, ...rest] = reviews;
+  const grid = rest.slice(0, 6);
 
   return (
     <>
       <CardsHeader
         title="O que vale jogar agora"
-        hint="Reviews e destaques feitos a partir de gameplay — não de press kit."
+        hint="As reviews mais novas primeiro — publicadas a partir das lives."
       />
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <section>
           {featured ? (
             <Link
-              href={`/homepage/${featured.slug}`}
+              href={`/reviews/${featured.slug}`}
               className="group block overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)]"
             >
               <div className="relative aspect-[16/9] overflow-hidden">
-                <Image
-                  alt={featured.alt}
-                  src={featured.url}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 640px, 100vw"
-                  className="object-cover transition duration-300 group-hover:scale-[1.03]"
-                />
+                {featured.url ? (
+                  <Image
+                    alt={featured.alt}
+                    src={featured.url}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 640px, 100vw"
+                    className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                  />
+                ) : (
+                  <div className="h-full w-full bg-[var(--surface-2)]" />
+                )}
+                {featured.scores?.overall != null && (
+                  <span className="absolute right-3 top-3 rounded-md bg-black/70 px-2 py-1 font-mono text-sm text-white backdrop-blur">
+                    {featured.scores.overall.toFixed(1)}
+                  </span>
+                )}
               </div>
               <div className="p-5">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-soft)]">
-                  Em alta
+                  Mais recente
                 </p>
                 <h2 className="mt-2 font-display text-2xl font-semibold text-white">
                   {featured.title}
@@ -46,12 +59,42 @@ const Home = async () => {
             </Link>
           ) : (
             <p className="rounded-2xl border border-[var(--line)] p-6 text-[var(--muted)]">
-              Nenhum destaque no momento.
+              Nenhuma review publicada ainda.
             </p>
           )}
         </section>
         <CardNews />
       </div>
+
+      {grid.length > 0 && (
+        <section className="mt-10">
+          <div className="mb-4 flex items-end justify-between gap-4">
+            <h2 className="font-display text-lg font-semibold text-white">
+              Publicadas agora
+            </h2>
+            <Link
+              href="/reviews"
+              className="text-sm text-[var(--brand-soft)] hover:text-white"
+            >
+              Ver todas →
+            </Link>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {grid.map((item) => (
+              <li key={item._id}>
+                <CardComponent
+                  alt={item.alt}
+                  description={item.description}
+                  title={item.title}
+                  url={item.url}
+                  slug={item.slug}
+                  score={item.scores?.overall}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </>
   );
 };

@@ -16,6 +16,8 @@ export interface HomePageType {
   textButton?: string;
   slug: string;
   scores?: ReviewScores;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface NewPostPageType {
@@ -23,6 +25,8 @@ export interface NewPostPageType {
   title: string;
   description: string;
   slug: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ReviewContentBlock {
@@ -61,4 +65,6 @@ export interface ReviewPost {
   scores?: ReviewScores;
   sections?: ReviewSection[];
   summary?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

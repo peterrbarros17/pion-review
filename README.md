@@ -8,7 +8,7 @@ The UI is in Portuguese (`pt-BR`). Content is served by a separate API ([pion-ap
 
 ## Features
 
-- Featured post on the homepage
+- Latest published review on the homepage, then a grid of recent reviews
 - Game reviews with dynamic slug pages
 - News sidebar and news listing
 - Search by title (`/results`)
@@ -67,7 +67,7 @@ Main routes:
 
 | Path | Description |
 | --- | --- |
-| `/` | Homepage with featured post and news |
+| `/` | Latest review, recent grid, and news |
 | `/reviews` | Review listing |
 | `/reviews/[slug]` | Review detail |
 | `/homepage/[slug]` | Featured post detail |

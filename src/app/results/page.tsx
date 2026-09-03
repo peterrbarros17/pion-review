@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { newestFirst, postPath } from "@/lib/getPosts";
 
 export const metadata: Metadata = {
   title: "Busca",
@@ -19,10 +20,10 @@ const Results = async ({
 
   const res = await fetch(
     `https://pion-api.vercel.app/search?title=${encodeURIComponent(search)}`,
-    { next: { revalidate: 0 } }
+    { cache: "no-store" }
   );
   const posts = res.ok ? await res.json() : [];
-  const list = Array.isArray(posts) ? posts : [];
+  const list = newestFirst(Array.isArray(posts) ? posts : []);
 
   return (
     <>
@@ -30,10 +31,19 @@ const Results = async ({
         {list.length} resultado{list.length === 1 ? "" : "s"} para “{search}”
       </p>
       <ul className="space-y-3">
-        {list.map((post: { _id: string; alt?: string; url?: string; title: string; description?: string; slug?: string }) => (
+        {list.map((post: {
+          _id: string;
+          alt?: string;
+          url?: string;
+          title: string;
+          description?: string;
+          slug?: string;
+          scores?: unknown;
+          format?: string;
+        }) => (
           <li key={post._id}>
             <Link
-              href={post.slug ? `/reviews/${post.slug}` : "/reviews"}
+              href={postPath(post)}
               className="flex gap-4 overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-3 hover:border-white/15"
             >
               {post.url && (
