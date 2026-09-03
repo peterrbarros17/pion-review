@@ -1,30 +1,28 @@
-import CardHeaders from "../CardsHeader";
 import Link from "next/link";
 import { getHomePost } from "@/lib/getPosts";
 import { NewPostPageType } from "@/types/homePageType";
-import { AiOutlineWeibo } from "react-icons/ai";
 
-interface CardNewsProps {}
-
-const CardNews = async ({}: CardNewsProps) => {
+const CardNews = async () => {
   const data: NewPostPageType[] = await getHomePost("newspage");
 
   return (
-    <aside className="w-full md:w-1/3 bg-[var(--gray-dark)]">
-      <div className="my-2 md:my-4 ml-0 md:ml-2">
-        <CardHeaders
-          title="Novidades"
-          icon={AiOutlineWeibo}
-          color="var(--red)"
-          size={24}
-        />
-      </div>
-      <ul className="flex flex-col divide-y-2 p-2 md:p-4">
+    <aside className="rounded-2xl border border-[var(--line)] bg-[var(--surface)]/80 p-5">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-soft)]">
+        Novidades
+      </p>
+      <h2 className="mt-1 font-display text-lg font-semibold text-white">
+        Lançamentos e notas
+      </h2>
+      <ul className="mt-4 divide-y divide-[var(--line)]">
         {data.map((item) => (
-          <li key={item._id} className="py-4">
-            <Link href={`/news/${item.slug}`}>
-              <h3 className="my-2 hover-links">{item.title}</h3>
-              <p className="text-slate-300 text-sm">{item.description}</p>
+          <li key={item._id} className="py-3 first:pt-0 last:pb-0">
+            <Link href={`/news/${item.slug}`} className="block group">
+              <h3 className="text-sm font-medium text-white group-hover:text-[var(--brand-soft)]">
+                {item.title}
+              </h3>
+              <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">
+                {item.description}
+              </p>
             </Link>
           </li>
         ))}

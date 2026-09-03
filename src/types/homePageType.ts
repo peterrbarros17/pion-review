@@ -1,11 +1,21 @@
+export interface ReviewScores {
+  overall?: number;
+  story?: number;
+  gameplay?: number;
+  visual?: number;
+  length?: number;
+  pricepoint?: number;
+}
+
 export interface HomePageType {
   _id: string;
   alt: string;
   url: string;
   title: string;
   description: string;
-  textButton: string;
+  textButton?: string;
   slug: string;
+  scores?: ReviewScores;
 }
 
 export interface NewPostPageType {
@@ -29,15 +39,6 @@ export interface ReviewGameMeta {
   releaseDate?: string;
   platforms?: string;
   price?: string;
-}
-
-export interface ReviewScores {
-  overall?: number;
-  story?: number;
-  gameplay?: number;
-  visual?: number;
-  length?: number;
-  pricepoint?: number;
 }
 
 export interface ReviewSection {

@@ -1,53 +1,63 @@
 import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Busca",
+  robots: { index: false, follow: true },
+};
 
 const Results = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  const search = searchParams.title as string;
+  const search = (searchParams.title ?? "").trim();
   if (!search) {
-    return <p>No search term provided.</p>;
+    return <p className="text-[var(--muted)]">Digite um termo na busca.</p>;
   }
 
-  const res = await fetch(`https://pion-api.vercel.app/search?title=${search}`);
-  const posts = await res.json();
-  console.log(posts);
-
-  const postsFound = posts.length > 0;
+  const res = await fetch(
+    `https://pion-api.vercel.app/search?title=${encodeURIComponent(search)}`,
+    { next: { revalidate: 0 } }
+  );
+  const posts = res.ok ? await res.json() : [];
+  const list = Array.isArray(posts) ? posts : [];
 
   return (
-    <div className="mx-2">
-      <p>
-        {postsFound
-          ? `${posts.length} post(s) encontrado(s) para "${search}"`
-          : `${posts.length} post encontrado para "${search}"`}
+    <>
+      <p className="mb-6 text-sm text-[var(--muted)]">
+        {list.length} resultado{list.length === 1 ? "" : "s"} para “{search}”
       </p>
-      {postsFound && (
-        <div>
-          {posts.map((post: any) => (
-            <div
-              key={post._id}
-              className="bg-red-500 my-5 p-4 flex gap-2 items-start min-w-[380px]"
+      <ul className="space-y-3">
+        {list.map((post: { _id: string; alt?: string; url?: string; title: string; description?: string; slug?: string }) => (
+          <li key={post._id}>
+            <Link
+              href={post.slug ? `/reviews/${post.slug}` : "/reviews"}
+              className="flex gap-4 overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-3 hover:border-white/15"
             >
-              <Image
-                alt={post.alt}
-                src={post.url}
-                width={1920}
-                height={1080}
-                className="w-28 h-24 md:w-36 md:h-36"
-              />
+              {post.url && (
+                <div className="relative h-20 w-32 shrink-0 overflow-hidden rounded-lg bg-[var(--surface-2)]">
+                  <Image
+                    alt={post.alt || post.title}
+                    src={post.url}
+                    fill
+                    sizes="128px"
+                    className="object-cover"
+                  />
+                </div>
+              )}
               <div>
-                <h2 className="capitalize text-md md:text-xl font-bold">
-                  {post.title}
-                </h2>
-                <p className="text-sm md:text-base">{post.description}</p>
+                <h2 className="font-display font-semibold text-white">{post.title}</h2>
+                <p className="mt-1 line-clamp-2 text-sm text-[var(--muted)]">
+                  {post.description}
+                </p>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

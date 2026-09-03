@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import ReadMoreButton from "../ReadMoreButton";
 
 interface CardComponentProps {
   alt: string;
   url: string;
   title: string;
   description: string;
-  textButton: string;
+  textButton?: string;
   slug: string;
+  href?: string;
+  score?: number;
+  eyebrow?: string;
 }
 
 const CardComponent = ({
@@ -17,27 +19,51 @@ const CardComponent = ({
   title,
   description,
   slug,
+  href,
+  score,
+  eyebrow = "Review",
 }: CardComponentProps) => {
+  const to = href ?? `/reviews/${slug}`;
+
   return (
-    <section>
-      <Link href={`/reviews/${slug}`}>
-        <Image
-          alt={alt}
-          src={url}
-          width={1920}
-          height={1080}
-          priority={true}
-          className="cursor-pointer hover:scale-105 transition-transform ease-in duration-150"
-        />
-        <article className="flex flex-col md:flex md:flex-row gap-4 px-0 py-0 md:px-2 md:py-2 items-center my-4">
-          <h1 className=" text-4xl w-full md:w-[40%] capitalize">{title}</h1>
-          <div className="flex flex-col gap-2 items-center w-full md:w-[60%]">
-            <p>{description}</p>
-            <ReadMoreButton>Leia mais...</ReadMoreButton>
-          </div>
-        </article>
+    <article className="group h-full overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)]/80 transition hover:border-white/15">
+      <Link href={to} className="flex h-full flex-col">
+        <div className="relative aspect-[16/9] overflow-hidden bg-[var(--surface-2)]">
+          {url ? (
+            <Image
+              alt={alt || title}
+              src={url}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              className="object-cover transition duration-300 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <div className="h-full w-full bg-[var(--surface-2)]" />
+          )}
+          {score != null && (
+            <span className="absolute right-3 top-3 rounded-md bg-black/70 px-2 py-1 font-mono text-sm text-white backdrop-blur">
+              {score.toFixed(1)}
+            </span>
+          )}
+        </div>
+        <div className="flex flex-1 flex-col gap-2 p-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-soft)]">
+            {eyebrow}
+          </p>
+          <h2 className="font-display text-lg font-semibold leading-snug text-white">
+            {title}
+          </h2>
+          {description && (
+            <p className="line-clamp-2 text-sm leading-relaxed text-[var(--muted)]">
+              {description}
+            </p>
+          )}
+          <span className="mt-auto pt-2 text-xs text-[var(--brand-soft)]">
+            Ler review →
+          </span>
+        </div>
       </Link>
-    </section>
+    </article>
   );
 };
 

@@ -1,18 +1,50 @@
-@import url(hover-link.css);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --black: #111;
-  --gray: #333;
-  --gray-dark: #222;
-  --red: #ff4343;
-  --white: #f0f0f0;
+  --canvas: #07080c;
+  --surface: #0d0f16;
+  --surface-2: #12151f;
+  --line: #1e2230;
+  --brand: #ff4d57;
+  --brand-soft: #ff8a90;
+  --ink: #e8eaef;
+  --muted: #8b92a5;
+  --black: #07080c;
+  --gray: #1e2230;
+  --gray-dark: #0d0f16;
+  --red: #ff4d57;
+  --white: #e8eaef;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--black);
-  color: var(--white);
-  letter-spacing: 0.1rem;
+  background:
+    radial-gradient(900px 480px at 8% -10%, rgba(255, 77, 87, 0.14), transparent 58%),
+    radial-gradient(720px 420px at 96% 0%, rgba(124, 92, 255, 0.08), transparent 55%),
+    var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(255, 77, 87, 0.35);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2f42 transparent;
+}
+
+.hover-links {
+  @apply transition-colors duration-150 hover:text-[var(--brand)];
+}
+
+.hover-links-midias {
+  @apply rounded-full border border-[var(--line)] bg-[var(--surface-2)] p-2 transition-colors duration-150 hover:border-[var(--brand)] hover:text-[var(--brand)];
 }

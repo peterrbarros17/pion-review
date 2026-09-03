@@ -1,17 +1,21 @@
-import React from "react";
-import { IconType } from "react-icons";
-
 interface CardsHeaderProps {
   title: string;
-  icon: IconType;
+  icon?: React.ComponentType<{ size?: string | number; color?: string }>;
   size?: string | number;
   color?: string;
+  hint?: string;
 }
-const CardsHeader = ({ title, icon, size, color }: CardsHeaderProps) => {
+
+const CardsHeader = ({ title, hint }: CardsHeaderProps) => {
   return (
-    <header className="flex items-center gap-2">
-      <div>{React.createElement(icon, { size, color })}</div>
-      <h2 className="text-lg">{title}</h2>
+    <header className="mb-5">
+      <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-soft)]">
+        Pion Review
+      </p>
+      <h1 className="font-display text-2xl font-semibold tracking-tight text-white">
+        {title}
+      </h1>
+      {hint && <p className="mt-1 text-sm text-[var(--muted)]">{hint}</p>}
     </header>
   );
 };

@@ -8,29 +8,33 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const term = query.trim();
+    if (!term) return;
     setQuery("");
-    router.push(`/results?title=${query}`);
+    router.push(`/results?title=${encodeURIComponent(term)}`);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex mx-10 md:mx-0 bg-[var(--gray-dark)] rounded-md"
-    >
+    <form onSubmit={handleSubmit} role="search" className="flex">
+      <label htmlFor="busca" className="sr-only">
+        Buscar reviews
+      </label>
       <input
-        type="text"
+        id="busca"
+        type="search"
         value={query}
-        placeholder="Buscar..."
+        placeholder="Buscar jogo..."
         onChange={(e) => setQuery(e.target.value)}
-        className="p-2 flex-grow outline-0 bg-white rounded-l-md text-black w-52 md:w-72 lg:w-full"
+        className="w-40 rounded-l-md border border-[var(--line)] bg-[var(--surface-2)] px-3 py-1.5 text-sm text-white outline-none placeholder:text-[var(--muted)] focus:border-[var(--brand)] md:w-56"
       />
       <button
         type="submit"
-        className="p-2 bg-[var(--gray-dark)] rounded-r-md flex items-center justify-center"
+        aria-label="Buscar"
+        className="rounded-r-md border border-l-0 border-[var(--line)] bg-[var(--surface)] px-2.5 text-[var(--muted)] hover:text-white"
       >
-        <AiOutlineSearch size={20} />
+        <AiOutlineSearch size={18} />
       </button>
     </form>
   );

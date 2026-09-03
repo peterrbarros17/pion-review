@@ -1,80 +1,55 @@
 import Link from "next/link";
-import { FaDiscord, FaTwitch, FaYoutube } from "react-icons/fa";
-import { IoLogoDiscord } from "react-icons/io5";
-import { FaRegCopyright } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { Concert_One } from "next/font/google";
+import { FaTwitch, FaYoutube, FaInstagram, FaDiscord } from "react-icons/fa";
 
-const concertOne = Concert_One({
-  weight: ["400"],
-  subsets: ["latin"],
-});
+const social = [
+  { href: "https://www.youtube.com", label: "YouTube", icon: FaYoutube },
+  { href: "https://www.twitch.tv", label: "Twitch", icon: FaTwitch },
+  { href: "https://www.instagram.com", label: "Instagram", icon: FaInstagram },
+  { href: "https://discord.com", label: "Discord", icon: FaDiscord },
+];
 
-interface AppFooterProps {}
-
-const AppFooter = ({}: AppFooterProps) => {
-  const socialMedias = [
-    {
-      id: 1,
-      href: "#",
-      hover: "bg-indigo-500",
-      iconType: FaDiscord,
-    },
-    {
-      id: 2,
-      href: "#",
-      hover: "bg-pink-500",
-      iconType: FaInstagram,
-    },
-    {
-      id: 3,
-      href: "#",
-      hover: "bg-red-500",
-      iconType: FaYoutube,
-    },
-    {
-      id: 4,
-      href: "#",
-      hover: "bg-red-500",
-      iconType: FaYoutube,
-    },
-    {
-      id: 5,
-      href: "#",
-      hover: "bg-purple-500",
-      iconType: FaTwitch,
-    },
-  ];
+const AppFooter = () => {
+  const year = new Date().getFullYear();
   return (
-    <footer className="flex flex-col items-center justify-center gap-1 md:gap-2 text-[12px] md:text-sm my-10">
-      <Link href="#" className="hover-links">
-        Volta ao Topo
-      </Link>
-      <p className="flex cursor-pointer gap-4 items-center hover:bg-indigo-500 transition-all duration-150 ease-in p-2 my-2 rounded-md">
-        <IoLogoDiscord className="text-4xl" />
-        <Link href="" className={`uppercase ${concertOne.className}`}>
-          Discord
-        </Link>
-      </p>
-      <nav>
-        <ul className="flex gap-4 text-xl md:text-2xl">
-          {socialMedias.map((item) => (
-            <Link href={item.href} key={item.id} target="__blank">
-              <li className={`hover:${item.hover} hover-links-midias`}>
-                <item.iconType />
-              </li>
-            </Link>
+    <footer className="mt-16 border-t border-[var(--line)]">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="font-display text-sm font-semibold text-white">
+            Pion<span className="text-[var(--brand)]">Review</span>
+          </p>
+          <p className="mt-1 max-w-sm text-xs leading-relaxed text-[var(--muted)]">
+            Reviews a partir de lives reais. Sem afiliação com publishers.
+          </p>
+        </div>
+        <nav aria-label="Rodapé" className="flex gap-4 text-xs text-[var(--muted)]">
+          <Link href="/reviews" className="hover:text-white">
+            Reviews
+          </Link>
+          <Link href="/news" className="hover:text-white">
+            Novidades
+          </Link>
+          <a href="#conteudo" className="hover:text-white">
+            Topo
+          </a>
+        </nav>
+        <ul className="flex gap-2">
+          {social.map((item) => (
+            <li key={item.label}>
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={item.label}
+                className="hover-links-midias inline-flex text-sm"
+              >
+                <item.icon />
+              </a>
+            </li>
           ))}
         </ul>
-      </nav>
-      <p className="flex items-center gap-4">
-        <FaRegCopyright />
-        <Link href="" className="hover-links">
-          Pion Review - 2024
-        </Link>
-      </p>
-      <p className="text-center">
-        Esse website não está afiliado com qualquer empresa de jogos digitais
+      </div>
+      <p className="border-t border-[var(--line)] py-4 text-center text-[11px] text-[var(--muted)]">
+        © {year} Pion Review
       </p>
     </footer>
   );

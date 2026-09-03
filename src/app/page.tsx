@@ -1,57 +1,58 @@
 import CardNews from "@/components/_ui/_main/CardNews";
 import CardsHeader from "@/components/_ui/_main/CardsHeader";
-import ReadMoreButton from "@/components/_ui/_main/ReadMoreButton";
 import { getHomePost } from "@/lib/getPosts";
 import { HomePageType } from "@/types/homePageType";
 import Image from "next/image";
 import Link from "next/link";
-import { RiFireFill } from "react-icons/ri";
 
 const Home = async () => {
   const data: HomePageType[] = await getHomePost("homepage");
   const featured = data[0];
 
   return (
-    <main>
-      <div className="flex flex-col md:flex md:flex-row gap-4">
-        <div className="w-full p-2 md:p-0 md:w-2/3 bg-[var(--gray-dark)] overflow-hidden flex flex-col">
-          <div className="my-4 ml-0 md:ml-2">
-            <CardsHeader
-              title="Em alta"
-              icon={RiFireFill}
-              color="var(--red)"
-              size={24}
-            />
-          </div>
+    <>
+      <CardsHeader
+        title="O que vale jogar agora"
+        hint="Reviews e destaques feitos a partir de gameplay — não de press kit."
+      />
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <section>
           {featured ? (
-            <Link href={`/homepage/${featured.slug}`}>
-              <Image
-                alt={featured.alt}
-                src={featured.url}
-                width={1920}
-                height={1080}
-                priority={true}
-                className="cursor-pointer hover:scale-105 transition-transform ease-in duration-150"
-              />
-              <article className="flex flex-col md:flex md:flex-row gap-4 px-0 py-0 md:px-2 md:py-2 items-center my-4">
-                <h1 className=" text-4xl w-full md:w-[40%] capitalize">
+            <Link
+              href={`/homepage/${featured.slug}`}
+              className="group block overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)]"
+            >
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <Image
+                  alt={featured.alt}
+                  src={featured.url}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 640px, 100vw"
+                  className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                />
+              </div>
+              <div className="p-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-soft)]">
+                  Em alta
+                </p>
+                <h2 className="mt-2 font-display text-2xl font-semibold text-white">
                   {featured.title}
-                </h1>
-                <div className="flex flex-col gap-2 items-center w-full md:w-[60%]">
-                  <p>{featured.description}</p>
-                  <ReadMoreButton>Leia mais...</ReadMoreButton>
-                </div>
-              </article>
+                </h2>
+                <p className="mt-2 line-clamp-3 text-sm text-[var(--muted)]">
+                  {featured.description}
+                </p>
+              </div>
             </Link>
           ) : (
-            <p className="p-4 text-slate-300">
-              Nenhum destaque disponível no momento.
+            <p className="rounded-2xl border border-[var(--line)] p-6 text-[var(--muted)]">
+              Nenhum destaque no momento.
             </p>
           )}
-        </div>
+        </section>
         <CardNews />
       </div>
-    </main>
+    </>
   );
 };
 

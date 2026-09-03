@@ -1,29 +1,44 @@
-// import CardPopular from "@/components/_ui/_main/CardPopular";
-// import CardsHeader from "@/components/_ui/_main/CardsHeader";
-// import { FaPepperHot } from "react-icons/fa6";
-import { Metadata } from "next";
+import CardComponent from "@/components/_ui/_main/CardFeatured/CardComponent";
+import CardsHeader from "@/components/_ui/_main/CardsHeader";
+import { getHomePost } from "@/lib/getPosts";
+import type { HomePageType, ReviewPost } from "@/types/homePageType";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Os melhore jogos mais bem avaliados - Pion Review",
-  description: "App games review",
+  title: "Jogos em alta",
+  description: "As reviews mais recentes e bem avaliadas do Pion Review.",
+  alternates: { canonical: "/popular" },
 };
 
-interface PopularPageProps {}
+const PopularPage = async () => {
+  const data = (await getHomePost("reviewspage")) as Array<
+    HomePageType & Partial<ReviewPost>
+  >;
+  const ranked = [...data].sort(
+    (a, b) => (b.scores?.overall ?? 0) - (a.scores?.overall ?? 0)
+  );
 
-const PopularPage = ({}: PopularPageProps) => {
   return (
-    <h1>Popular</h1>
-    // <section className="bg-[var(--black)] p-4">
-    //   <div className="my-4">
-    //     <CardsHeader
-    //       title="Popular"
-    //       size={24}
-    //       icon={FaPepperHot}
-    //       color="var(--red)"
-    //     />
-    //   </div>
-    //   <CardPopular />
-    // </section>
+    <>
+      <CardsHeader
+        title="Popular"
+        hint="Ordenado pela nota geral quando ela existe."
+      />
+      <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {ranked.map((item) => (
+          <li key={item._id}>
+            <CardComponent
+              alt={item.alt}
+              description={item.description}
+              title={item.title}
+              url={item.url}
+              slug={item.slug}
+              score={item.scores?.overall}
+            />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 
