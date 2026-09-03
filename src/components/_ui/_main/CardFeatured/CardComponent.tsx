@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaPlay, FaTwitch, FaYoutube } from "react-icons/fa";
+import { resolveSourceVideo } from "@/lib/source-video";
+import type { SourceVideo } from "@/types/homePageType";
 
 interface CardComponentProps {
   alt: string;
@@ -11,6 +14,7 @@ interface CardComponentProps {
   href?: string;
   score?: number;
   eyebrow?: string;
+  sourceVideo?: SourceVideo;
 }
 
 const CardComponent = ({
@@ -22,12 +26,15 @@ const CardComponent = ({
   href,
   score,
   eyebrow = "Review",
+  sourceVideo,
 }: CardComponentProps) => {
   const to = href ?? `/reviews/${slug}`;
+  const video = resolveSourceVideo({ url, sourceVideo });
+  const WatchIcon = video?.provider === "twitch" ? FaTwitch : FaYoutube;
 
   return (
-    <article className="group h-full overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)]/80 transition hover:border-white/15">
-      <Link href={to} className="flex h-full flex-col">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)]/80 transition hover:border-white/15">
+      <Link href={to} className="flex flex-1 flex-col">
         <div className="relative aspect-[16/9] overflow-hidden bg-[var(--surface-2)]">
           {url ? (
             <Image
@@ -39,6 +46,11 @@ const CardComponent = ({
             />
           ) : (
             <div className="h-full w-full bg-[var(--surface-2)]" />
+          )}
+          {video && (
+            <span className="absolute left-3 top-3 inline-flex size-9 items-center justify-center rounded-full bg-black/70 text-white backdrop-blur">
+              <FaPlay className="ml-0.5 text-xs" />
+            </span>
           )}
           {score != null && (
             <span className="absolute right-3 top-3 rounded-md bg-black/70 px-2 py-1 font-mono text-sm text-white backdrop-blur">
@@ -63,6 +75,24 @@ const CardComponent = ({
           </span>
         </div>
       </Link>
+      {video && (
+        <a
+          href={video.watchUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-2 border-t border-[var(--line)] px-4 py-2.5 text-xs text-[var(--muted)] hover:bg-white/[0.03] hover:text-white"
+        >
+          <WatchIcon className="shrink-0" />
+          <span className="truncate">
+            {video.channelName
+              ? `Gameplay · ${video.channelName}`
+              : `Assista no ${video.platformLabel}`}
+          </span>
+          <span className="ml-auto shrink-0 text-[var(--brand-soft)]">
+            {video.platformLabel} →
+          </span>
+        </a>
+      )}
     </article>
   );
 };

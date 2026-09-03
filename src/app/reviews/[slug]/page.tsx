@@ -1,11 +1,13 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import getPostBySlug from "@/lib/getPosts";
+import { resolveSourceVideo } from "@/lib/source-video";
 import {
   GameMetaTable,
   ReviewSections,
   ScoreBanner,
 } from "@/components/_ui/_main/StructuredReview";
+import ReviewSourceVideo from "@/components/_ui/_main/ReviewSourceVideo";
 import type { ReviewContentBlock, ReviewPost } from "@/types/homePageType";
 
 async function loadReview(slug: string): Promise<ReviewPost> {
@@ -48,6 +50,10 @@ const PageSlug = async ({ params }: { params: { slug: string } }) => {
     post.format === "structured" &&
     Array.isArray(post.sections) &&
     post.sections.length > 0;
+  const sourceVideo = resolveSourceVideo({
+    url: post.url,
+    sourceVideo: post.sourceVideo,
+  });
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -74,6 +80,17 @@ const PageSlug = async ({ params }: { params: { slug: string } }) => {
           },
         }
       : {}),
+    ...(sourceVideo
+      ? {
+          associatedMedia: {
+            "@type": "VideoObject",
+            name: sourceVideo.title || post.title,
+            url: sourceVideo.watchUrl,
+            embedUrl: sourceVideo.embedUrl,
+            thumbnailUrl: sourceVideo.poster || post.url,
+          },
+        }
+      : {}),
   };
 
   return (
@@ -92,7 +109,13 @@ const PageSlug = async ({ params }: { params: { slug: string } }) => {
         <p className="mt-3 max-w-2xl text-[var(--muted)]">{post.description}</p>
       )}
 
-      {post.url && (
+      {sourceVideo ? (
+        <ReviewSourceVideo
+          poster={post.url}
+          alt={post.alt || post.title}
+          video={sourceVideo}
+        />
+      ) : post.url ? (
         <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-[var(--line)]">
           <Image
             alt={post.alt || post.title}
@@ -103,7 +126,7 @@ const PageSlug = async ({ params }: { params: { slug: string } }) => {
             className="object-cover"
           />
         </div>
-      )}
+      ) : null}
 
       {isStructured ? (
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px]">

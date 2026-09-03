@@ -1,3 +1,13 @@
+export interface SourceVideo {
+  provider?: string;
+  url?: string;
+  videoId?: string;
+  title?: string;
+  channelName?: string;
+  channelUrl?: string;
+  thumbnailUrl?: string;
+}
+
 export interface ReviewScores {
   overall?: number;
   story?: number;
@@ -18,6 +28,7 @@ export interface HomePageType {
   scores?: ReviewScores;
   createdAt?: string;
   updatedAt?: string;
+  sourceVideo?: SourceVideo;
 }
 
 export interface NewPostPageType {
@@ -65,6 +76,7 @@ export interface ReviewPost {
   scores?: ReviewScores;
   sections?: ReviewSection[];
   summary?: string;
+  sourceVideo?: SourceVideo;
   createdAt?: string;
   updatedAt?: string;
 }

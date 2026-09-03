@@ -34,6 +34,7 @@ const PopularPage = async () => {
               url={item.url}
               slug={item.slug}
               score={item.scores?.overall}
+              sourceVideo={item.sourceVideo}
             />
           </li>
         ))}

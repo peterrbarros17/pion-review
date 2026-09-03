@@ -38,6 +38,12 @@ const nextConfig = {
         port: "",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "static-cdn.jtvnw.net",
+        port: "",
+        pathname: "**",
+      },
     ],
   },
 };

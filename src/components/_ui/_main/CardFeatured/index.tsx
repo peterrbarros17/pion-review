@@ -14,6 +14,7 @@ const CardFeatured = ({ items }: { items: HomePageType[] }) => {
               url={item.url}
               slug={item.slug}
               score={item.scores?.overall}
+              sourceVideo={item.sourceVideo}
             />
           </li>
         ))}
